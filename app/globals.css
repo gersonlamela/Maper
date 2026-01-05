@@ -4,9 +4,6 @@
 @custom-variant dark (&:is(.dark *));
 @tailwind utilities;
 
-/* ===================== */
-/* 🌍 ROOT – LIGHT MODE  */
-/* ===================== */
 :root {
   /* ===================== */
   /* MA.PER Brand */
@@ -18,10 +15,13 @@
   --black: #000000;
   --dark: #242424;
 
-  --gray-100: #f7f7f7;
-  --gray-300: #d9d9d9;
-  --gray-500: #b1b1b1;
-  --gray-700: #969696;
+  --gray100: #f7f7f7;
+  --gray300: #d6d6d6;
+  --gray300: #d9d9d9;
+  --gray400: #595959;
+  --gray500: #b1b1b1;
+  --gray700: #969696;
+  --gray800: #979899;
 
   /* ===================== */
   /* Shadcn Base */

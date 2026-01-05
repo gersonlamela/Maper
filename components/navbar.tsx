@@ -1,5 +1,6 @@
 import { Search, ShoppingBag, UserRound } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Navbar() {
   return (
@@ -13,12 +14,14 @@ export default function Navbar() {
             height={16}
           />
         </div>
-        <Image
-          src="images/logo/logo-pink.svg"
-          alt="MA.PER logo"
-          width={103}
-          height={30}
-        />
+        <Link href="/">
+          <Image
+            src="images/logo/logo-pink.svg"
+            alt="MA.PER logo"
+            width={103}
+            height={30}
+          />
+        </Link>
         <div className="flex w-18.5 items-center justify-center gap-3.75">
           <UserRound size={22} />
           <hr className="h-5.5 border border-black" />

@@ -8,12 +8,10 @@ import {
   CarouselPrevious,
 } from '../ui/carousel';
 
-export default function FeaturedProducts() {
+export default function NewProducts() {
   return (
     <div className="flex w-full flex-col items-start justify-center gap-4 px-4">
-      <h1 className="text-primary text-[20px] font-bold">
-        Produtos em destaque
-      </h1>
+      <h1 className="text-primary text-[20px] font-bold">Lançamentos</h1>
 
       <Carousel
         opts={{

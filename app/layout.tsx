@@ -1,5 +1,6 @@
+import Footer from '@/components/footer';
 import InformationBar from '@/components/information-bar';
-import Navbar from '@/components/navbar';
+import Navbar from '@/components/navbar/navbar';
 import type { Metadata } from 'next';
 import { Nunito_Sans } from 'next/font/google';
 import './globals.css';
@@ -25,6 +26,7 @@ export default function RootLayout({
         <InformationBar />
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );

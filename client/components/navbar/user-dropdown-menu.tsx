@@ -17,7 +17,9 @@ export default function UserDropdownMenu() {
         <DropdownMenuItem>
           <Link href="login">Iniciar sessão</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem>Criar Conta</DropdownMenuItem>
+        <DropdownMenuItem>
+          <Link href="register">Criar Conta</Link>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

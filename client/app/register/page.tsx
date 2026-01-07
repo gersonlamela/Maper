@@ -20,7 +20,7 @@ export default function Register() {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink href="/">Iniciar Sessão</BreadcrumbLink>
+              <BreadcrumbLink href="login">Iniciar Sessão</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>

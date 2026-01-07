@@ -1,16 +1,17 @@
 'use client';
-import { Search, ShoppingBag, UserRound, X } from 'lucide-react';
+import { Search, ShoppingBag, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Input } from '../ui/input';
 import MenuMobile from './menu-mobile';
+import UserDropdownMenu from './user-dropdown-menu';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   console.log(open);
   return (
-    <div className="border-gray200 flex h-25 w-full flex-col items-center justify-between gap-2.5 border-b px-5 py-2.5">
+    <div className="border-gray200 sticky top-0 z-50 flex h-25 w-full flex-col items-center justify-between gap-2.5 border-b bg-white px-5 py-2.5">
       <div className="flex w-full items-center justify-between">
         <div className="w-18.5">
           {open ? (
@@ -34,7 +35,7 @@ export default function Navbar() {
           />
         </Link>
         <div className="flex w-18.5 items-center justify-center gap-3.75">
-          <UserRound size={22} />
+          <UserDropdownMenu />
           <hr className="h-5.5 border border-black" />
           <div className="relative">
             <ShoppingBag size={22} />
@@ -45,12 +46,12 @@ export default function Navbar() {
         </div>
       </div>
 
-      <div className="border-gray800 relative flex h-10 w-full items-center justify-center gap-3.75 rounded-full border px-5 py-2.5">
+      <div className="border-gray800 relative flex h-10 w-full items-center justify-center rounded-full border px-5 py-2.5">
         <Search size={20} className="" />
         <Input
           type="text"
           name="search"
-          className="flex-1 border-0 placeholder:text-[#595959]"
+          className="flex-1 border-0 placeholder:text-[#595959] focus-visible:ring-0 focus-visible:ring-offset-0"
           placeholder="O que está à procura?"
         />
       </div>

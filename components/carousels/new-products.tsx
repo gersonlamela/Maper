@@ -35,7 +35,7 @@ export default function NewProducts() {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="border-primary text-primary -top-7 ml-85" />
+        <CarouselPrevious className="border-primary text-primary -top-7 ml-96" />
         <CarouselNext className="border-primary text-primary abosulte -top-7 right-0" />
       </Carousel>
 

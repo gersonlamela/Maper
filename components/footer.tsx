@@ -1,9 +1,17 @@
+'use client';
+
 import Image from 'next/image';
 
 export default function Footer() {
+  function handleGoTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
   return (
     <div className="flex w-full flex-col items-center justify-center bg-[#242424] py-5">
-      <div className="flex items-center justify-center gap-3.75">
+      <button
+        onClick={handleGoTop}
+        className="flex cursor-pointer items-center justify-center gap-3.75"
+      >
         <Image
           src="/images/icons/arrowup.svg"
           alt="Voltar para o topo"
@@ -14,7 +22,7 @@ export default function Footer() {
         <h1 className="text-center text-sm font-medium text-white">
           Voltar para o topo
         </h1>
-      </div>
+      </button>
       <hr className="my-3.75 w-[320px] border border-[#D1D1D1]" />
 
       <div className="flex w-full flex-row flex-wrap items-start justify-between gap-7.5 px-14">

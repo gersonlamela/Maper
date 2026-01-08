@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { createUserService } from "../services/users/create-user.service";
+import { createUserService } from "../../services/users/create-user.service";
 
 interface CreateUserBody {
   name: string;

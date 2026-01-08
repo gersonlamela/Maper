@@ -1,4 +1,5 @@
 import "@fastify/jwt";
+import "fastify";
 
 declare module "@fastify/jwt" {
   interface FastifyJWT {

@@ -36,8 +36,24 @@ export default function LoginForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof loginFormSchema>) {
-    alert(values.email + ' ' + values.password);
+  async function onSubmit(values: z.infer<typeof loginFormSchema>) {
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(values),
+    });
+
+    if (!res.ok) {
+      form.setError('root', {
+        message: 'Dados inválidos. Por favor, tente novamente.',
+      });
+      return;
+    }
+
+    const data = await res.json();
+    console.log('User logged in:', data.user);
   }
   return (
     <Card className="mx-auto mb-7.5 flex min-h-86 w-75 items-center p-7.5">
@@ -104,6 +120,12 @@ export default function LoginForm() {
                 Esqueceu-se da sua senha?
               </span>
             </div>
+
+            {form.formState.errors.root && (
+              <p className="text-sm text-red-500">
+                {form.formState.errors.root.message}
+              </p>
+            )}
 
             <Button
               type="submit"

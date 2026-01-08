@@ -40,17 +40,25 @@ export default function RegisterForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof registerFormSchema>) {
-    alert(
-      'Olá ' +
-        values.name +
-        ' ' +
-        values.surname +
-        ', o seu email é ' +
-        values.email +
-        ' e a sua palavra-passe é ' +
-        values.password,
-    );
+  async function onSubmit(values: z.infer<typeof registerFormSchema>) {
+    const res = await fetch('/api/auth/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: values.name + ' ' + values.surname,
+        email: values.email,
+        password: values.password,
+      }),
+    });
+
+    if (!res.ok) {
+      form.setError('root', {
+        message: 'Dados inválidos. Por favor, tente novamente.',
+      });
+      return;
+    }
   }
   return (
     <Card className="mx-auto mb-7.5 flex min-h-86 w-75 items-center p-7.5">
@@ -148,6 +156,12 @@ export default function RegisterForm() {
                 )}
               />
             </div>
+
+            {form.formState.errors.root && (
+              <p className="text-sm text-red-500">
+                {form.formState.errors.root.message}
+              </p>
+            )}
 
             <Button
               type="submit"

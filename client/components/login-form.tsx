@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Eye, EyeClosed } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import z from 'zod';
@@ -24,6 +25,10 @@ const loginFormSchema = z.object({
 });
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const redirect = searchParams.get('redirect') ?? '/';
 
   function handleShowPassword() {
     setShowPassword(!showPassword);
@@ -52,8 +57,9 @@ export default function LoginForm() {
       return;
     }
 
-    const data = await res.json();
-    console.log('User logged in:', data.user);
+    if (res.ok) {
+      router.replace(redirect);
+    }
   }
   return (
     <Card className="mx-auto mb-7.5 flex min-h-86 w-75 items-center p-7.5">

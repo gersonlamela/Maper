@@ -1,62 +1,34 @@
 'use client';
-import { Search, ShoppingBag, X } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
+
 import { useState } from 'react';
-import { Input } from '../ui/input';
-import MenuMobile from './menu-mobile';
-import UserDropdownMenu from './user-dropdown-menu';
+
+import { NavbarActions } from './navbar-actions';
+import { NavbarLogo } from './navbar-logo';
+import NavbarMenuMobile from './navbar-menu-mobile';
+import { NavbarMenuToggle } from './navbar-menu-toggle';
+import { NavbarSearch } from './navbar-search';
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
-  console.log(open);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
-    <div className="border-gray200 sticky top-0 z-50 flex h-25 w-full flex-col items-center justify-between gap-2.5 border-b bg-white px-5 py-2.5">
-      <div className="flex w-full items-center justify-between">
-        <div className="w-18.5">
-          {open ? (
-            <X size={22} onClick={() => setOpen(!open)} />
-          ) : (
-            <Image
-              src="images/icons/menu.svg"
-              alt="MA.PER logo"
-              width={22}
-              height={16}
-              onClick={() => setOpen(!open)}
-            />
-          )}
-        </div>
-        <Link href="/">
-          <Image
-            src="images/logo/logo-pink.svg"
-            alt="MA.PER logo"
-            width={103}
-            height={30}
+    <header className="sticky top-0 z-50 border-b bg-white">
+      <div className="flex flex-col gap-2.5 px-5 py-2.5">
+        <div className="flex items-center justify-between">
+          <NavbarMenuToggle
+            isOpen={isMenuOpen}
+            onToggle={() => setIsMenuOpen((prev) => !prev)}
           />
-        </Link>
-        <div className="flex w-18.5 items-center justify-center gap-3.75">
-          <UserDropdownMenu />
-          <hr className="h-5.5 border border-black" />
-          <div className="relative">
-            <ShoppingBag size={22} />
-            <div className="bg-primary absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full text-[12px] font-bold text-white">
-              3
-            </div>
-          </div>
+
+          <NavbarLogo />
+
+          <NavbarActions />
         </div>
-      </div>
 
-      <div className="border-gray800 relative flex h-10 w-full items-center justify-center rounded-full border px-5 py-2.5">
-        <Search size={20} className="" />
-        <Input
-          type="text"
-          name="search"
-          className="flex-1 border-0 placeholder:text-[#595959] focus-visible:ring-0 focus-visible:ring-offset-0"
-          placeholder="O que está à procura?"
-        />
-      </div>
+        <NavbarSearch />
 
-      {open ? <MenuMobile /> : <></>}
-    </div>
+        {isMenuOpen && <NavbarMenuMobile />}
+      </div>
+    </header>
   );
 }

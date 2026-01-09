@@ -1,10 +1,12 @@
-import { cookies } from 'next/headers';
+import { createSession } from '@/lib/session';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
   const body = await req.json();
 
-  const res = await fetch('http://localhost:3333/api/login', {
+  console.log('Login body:', body);
+
+  const res = await fetch('http://localhost:3333/api/auth/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -13,21 +15,18 @@ export async function POST(req: Request) {
   });
 
   if (!res.ok) {
-    return NextResponse.json(
-      { message: 'Credenciais inválidas' },
-      { status: 401 },
-    );
+    return NextResponse.json({ message: 'Dados Inválidos' }, { status: 401 });
   }
 
-  const { token, user } = await res.json();
+  const { user } = await res.json();
 
-  (await cookies()).set('auth_token', token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    path: '/',
-    maxAge: 60 * 60 * 24, // 1 dia
+  await createSession(user.id, user.email, user.role);
+
+  return NextResponse.json({
+    user: {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+    },
   });
-
-  return NextResponse.json({ user });
 }

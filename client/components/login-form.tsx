@@ -59,6 +59,7 @@ export default function LoginForm() {
 
     if (res.ok) {
       router.replace(redirect);
+      router.refresh();
     }
   }
   return (

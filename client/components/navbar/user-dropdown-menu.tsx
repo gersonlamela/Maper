@@ -1,5 +1,7 @@
+'use client';
+
+import { logoutAction } from '@/app/actions/logout';
 import { UserRound } from 'lucide-react';
-import Link from 'next/link';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,18 +9,28 @@ import {
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
 
-export default function UserDropdownMenu() {
+interface UserDropdownMenuProps {
+  email?: string;
+}
+
+export default function UserDropdownMenu({ email }: UserDropdownMenuProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
         <UserRound size={22} />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="">
-        <DropdownMenuItem>
-          <Link href="login">Iniciar sessão</Link>
+
+      <DropdownMenuContent>
+        <DropdownMenuItem disabled className="opacity-70">
+          {email}
         </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link href="register">Criar Conta</Link>
+
+        <DropdownMenuItem asChild>
+          <form action={logoutAction}>
+            <button type="submit" className="w-full text-left">
+              Terminar sessão
+            </button>
+          </form>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

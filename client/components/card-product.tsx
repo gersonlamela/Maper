@@ -1,3 +1,4 @@
+import { formatPriceEUR } from '@/utils/format-price';
 import { ShoppingBag } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from './ui/button';
@@ -8,6 +9,7 @@ interface CardProductProps {
   price: number;
   category: string;
   imageSrc: string;
+  discountPercent?: number;
 }
 
 export default function CardProduct({
@@ -15,6 +17,7 @@ export default function CardProduct({
   price,
   category,
   imageSrc,
+  discountPercent,
 }: CardProductProps) {
   return (
     <Card className="border-0 p-0 shadow-none">
@@ -34,10 +37,26 @@ export default function CardProduct({
           <h2 className="text-gray700 mt-1.25 text-center text-sm font-normal">
             {category}
           </h2>
-          <p className="text-primary mt-2.5 text-center text-sm font-bold">
-            {price}€
-          </p>
+          {discountPercent ? (
+            <div className="flex w-29.5 flex-row items-start justify-between">
+              <p className="text-primary mt-2.5 text-center text-sm font-bold">
+                {formatPriceEUR(price - discountPercent)}
+              </p>
 
+              <div className="relative flex flex-col items-end">
+                <p className="text-primary absolute -top-[15px] mt-2.5 text-center text-sm font-bold">
+                  -{discountPercent}%
+                </p>
+                <p className="decoration-primary mt-2.5 text-center text-sm font-bold text-black line-through">
+                  {formatPriceEUR(price)}
+                </p>
+              </div>
+            </div>
+          ) : (
+            <p className="text-primary mt-2.5 text-center text-sm font-bold">
+              {formatPriceEUR(price)}
+            </p>
+          )}
           <Button className="absolute right-0 bottom-1 flex h-10 w-10 items-center justify-center rounded-full rounded-bl-none bg-white text-black shadow-md">
             <ShoppingBag size={21.6} />
             <span className="text-primary absolute -top-2 -right-1 text-2xl">
